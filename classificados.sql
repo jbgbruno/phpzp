@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 04-Jul-2019 às 22:29
+-- Generation Time: 06-Jul-2019 às 16:40
 -- Versão do servidor: 10.1.40-MariaDB
 -- versão do PHP: 7.3.5
 
@@ -38,6 +38,25 @@ CREATE TABLE `anuncios` (
   `estado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `anuncios`
+--
+
+INSERT INTO `anuncios` (`id`, `id_usuario`, `id_categoria`, `titulo`, `descricao`, `valor`, `estado`) VALUES
+(1, 1, 1, 'Hublot', 'etretew', 100, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `anuncios_imagens`
+--
+
+CREATE TABLE `anuncios_imagens` (
+  `id` int(11) NOT NULL,
+  `id_anuncio` int(11) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +67,16 @@ CREATE TABLE `categorias` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `nome`) VALUES
+(1, 'Relogios'),
+(2, 'Roupas'),
+(3, 'Eletronicos'),
+(4, 'Carros');
 
 -- --------------------------------------------------------
 
@@ -81,6 +110,12 @@ ALTER TABLE `anuncios`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `anuncios_imagens`
+--
+ALTER TABLE `anuncios_imagens`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `categorias`
 --
 ALTER TABLE `categorias`
@@ -100,13 +135,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `anuncios`
 --
 ALTER TABLE `anuncios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `anuncios_imagens`
+--
+ALTER TABLE `anuncios_imagens`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
