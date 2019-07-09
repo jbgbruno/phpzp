@@ -11,7 +11,7 @@ endif;
 
 <div class="container">
   <h1>Meus Anúncios</h1>
-<a href="add-anuncio.php" class="btn btn-default">Adicionar Anúncio</a>
+  <a href="add-anuncio.php" class="btn btn-default">Adicionar Anúncio</a>
   <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -30,14 +30,23 @@ endif;
       foreach ($anuncios as $anuncio) :
         ?>
         <tr>
-          <td><img src="assets/images/anuncios/<?php echo $anuncio['url']?>"></td>
-          <td><?php echo $anuncio['titulo'];?></td>
-          <td>R$ <?php echo number_format($anuncio['valor'],2);?></td>
-          <td></td>
+          <td>
+            <?php if (!empty($anuncio['url'])) : ?>
+              <img src="assets/images/anuncios/<?php echo $anuncio['url'] ?>" height="50">
+            <?php else : ?>
+              <img src="assets/images/default.jpg" height="50">
+            <?php endif; ?>
+          </td>
+          <td><?php echo $anuncio['titulo']; ?></td>
+          <td>R$ <?php echo number_format($anuncio['valor'], 2); ?></td>
+          <td>
+            <a class="btn btn-default" href="editar-anuncio.php?id=<?php echo $anuncio['id']?>">Editar</a>
+            <a class="btn btn-danger" href="excluir-anuncio.php?id=<?php echo $anuncio['id']?>">Excluir</a>
+          </td>
         </tr>
       <?php
-      endforeach;
-      ?>
+    endforeach;
+    ?>
 
     </tbody>
   </table>
