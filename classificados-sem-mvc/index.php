@@ -16,7 +16,7 @@ if (isset($_GET['filtros']) && !empty($_GET['filtros'])) {
 	$filtros = $_GET['filtros'];
 }
 
-$total_anuncios = $a->getTotalAnuncios();
+$total_anuncios = $a->getTotalAnuncios($filtros);
 $total_usuarios = $u->getTotalUsuarios();
 $p = 1;
 if (isset($_GET['p']) && !empty($_GET['p'])) {
@@ -92,7 +92,13 @@ $categorias = $c->getLista();
 			</table>
 			<ul class="pagination">
 				<?php for ($q = 1; $q <= $total_paginas; $q++) : ?>
-					<li class="<?php echo ($p == $q) ? 'active' : '' ?>"><a href="index.php?p=<?php echo $q; ?>"><?php echo ($q); ?></a></li>
+					<li class="<?php echo ($p == $q) ? 'active' : '' ?>"><a href="index.php?<?php 
+					$w = $_GET;
+					$w['p'] =$q;
+					echo http_build_query($w);
+
+					
+					?>"><?php echo ($q); ?></a></li>
 				<?php endfor; ?>
 			</ul>
 		</div>

@@ -1,10 +1,31 @@
 <?php
 class Anuncios
 {
-  public function getTotalAnuncios()
+  public function getTotalAnuncios($filtros)
   {
     global $pdo;
-    $sql = $pdo->query('SELECT count(*) as c from anuncios');
+    $filtrostring = ['1=1'];
+    if (!empty($filtros['categoria'])) {
+      $filtrostring[] = 'anuncios.id_categoria = :id_categoria';
+    }
+    if (!empty($filtros['preco'])) {
+      $filtrostring[] = 'anuncios.valor between :preco1 and :preco2';
+    }
+    if (!empty($filtros['estado'])) {
+      $filtrostring[] = 'anuncios.estado = :estado';
+    }
+    $sql = $pdo->prepare('SELECT count(*) as c from anuncios where '.implode(' and ', $filtrostring));
+    if (!empty($filtros['categoria'])) {
+      $sql->bindValue(':id_categoria', $filtros['categoria']);
+    }
+    if (!empty($filtros['preco'])) {
+      $preco = explode('-', $filtros['preco']);
+      $sql->bindValue(':preco1', $preco[0]);
+      $sql->bindValue(':preco2', $preco[1]);
+    }
+    if (!empty($filtros['estado'])) {
+      $sql->bindValue(':estado', $filtros['estado']);
+    }
     $sql->execute();
     $row = $sql->fetch();
     return $row['c'];
