@@ -1,15 +1,20 @@
 <?php
-class homeController {
-  public function index($params)
+class homeController extends controller {
+  public function index()
   {
-    echo 'voce esta na funcao index da home';
-    echo ('<pre>');
-    var_dump($params);
-    echo ('</pre>');
+    $anuncios = new Anuncios();
+    $usuarios = new Usuarios;
+    $dados = [
+      'nome'=>$usuarios->getNome(),
+      'quantidade'=> $anuncios->getQuantidade(),
+      'idade' => $usuarios->getIdade()  
+    ];
+    
+    $this->loadTemplate('home', $dados);
   }
   public function teste()
   {
-    echo 'voce esta na funcao teste da home';
+
 
   }
 }

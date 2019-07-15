@@ -1,9 +1,9 @@
 <?php
-class galeriaController {
+class galeriaController extends controller {
   public function index(){
-    echo 'pagina de galeria. metodo index';
-  }
-  public function abrir($id){
-    echo 'galeria:' .$id;
+   $dados = [
+     'quant' => 129
+   ]; 
+   $this->loadTemplate('galeria',$dados);
   }
 }
