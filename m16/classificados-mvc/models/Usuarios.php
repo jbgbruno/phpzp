@@ -1,15 +1,15 @@
 <?php
-class Usuarios  extends model{
+class Usuarios extends model {
 
   public function getTotalUsuarios(){
-
+    
     $sql = $this->db->query('SELECT count(*) as u from usuarios');
     $sql->execute();
     $row = $sql->fetch();
     return $row['u'];
   }
   public function cadastrar($nome,$email,$senha,$telefone){
-
+    
     $sql = $this->db->prepare('select id from usuarios where email = :email');
     $sql->bindValue(':email', $email);
     $sql->execute();
@@ -28,7 +28,6 @@ class Usuarios  extends model{
   }
 
   public function login($email, $senha){
-
 
     $sql = $this->db->prepare("select id from usuarios
        where email= :email and senha = :senha ");

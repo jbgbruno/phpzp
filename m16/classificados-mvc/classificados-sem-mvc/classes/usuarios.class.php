@@ -3,6 +3,7 @@ class Usuarios {
 
   public function getTotalUsuarios(){
     global $pdo;
+
     $sql = $pdo->query('SELECT count(*) as u from usuarios');
     $sql->execute();
     $row = $sql->fetch();
