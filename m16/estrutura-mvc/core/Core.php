@@ -1,12 +1,14 @@
 <?php
 class Core {
   public function run(){
-    //echo 'URL: '.$_GET['url'];
-    
+
     $url = '/';
     if (isset($_GET['url'])){
       $url .= $_GET['url'];
     }
+
+    $url = $this->checkRoutes($url);
+ 
     $params=[];
     if(!empty($url)&& $url !='/'){
       $url = explode('/',$url);
@@ -36,10 +38,5 @@ class Core {
     call_user_func_array([$c,$currentAction], $params);
 
 
-
-    // echo '<hr>';
-    // echo "Controller: ".$currentController.'<br>';
-    // echo "Action: ".$currentAction.'<br>';
-    // echo "PARAMS: ".print_r($params,true) .'<br>';
   }
 }
