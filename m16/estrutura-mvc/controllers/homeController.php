@@ -12,9 +12,9 @@ class homeController extends controller {
     
     $this->loadTemplate('home', $dados);
   }
-  public function teste()
+  public function teste($params)
   {
-
+      var_dump($params);
 
   }
 }
